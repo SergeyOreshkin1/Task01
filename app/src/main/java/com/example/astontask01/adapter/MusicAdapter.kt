@@ -21,9 +21,10 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Model>() {
 }
 
 class MusicGroupListAdapter
-        : ListAdapter<Model,MusicGroupListAdapter.ModelViewHolder>(DIFF_CALLBACK) {
+        : ListAdapter<Model, MusicGroupListAdapter.ModelViewHolder>(DIFF_CALLBACK) {
 
     var listener: (Model, Int) -> Unit = { numberItem: Model, i: Int -> }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder {
        return ModelViewHolder(
@@ -39,7 +40,7 @@ class MusicGroupListAdapter
         holder.bind(getItem(position))
 
         holder.itemView.setOnClickListener {
-            listener(getItem(position), position)
+        listener(getItem(position), position)
 
         }
     }
@@ -51,12 +52,18 @@ class MusicGroupListAdapter
 
         @SuppressLint("SetTextI18n")
         fun bind(model: Model){
-            binding.name.text = "Название: " + model.name
-            binding.genre.text = "Жанр: " + model.genre
-            binding.country.text = "Страна: " + model.country
-            binding.banner.load(model.image) {
+
+        binding.apply {
+
+            name.text = root.resources.getString(R.string.name) + model.name
+            genre.text = root.resources.getString(R.string.genre) + model.genre
+            country.text =  root.resources.getString(R.string.country) + model.country
+
+            banner.load(model.image) {
                 placeholder(R.drawable.noimage)
             }
+        }
+
         }
     }
 }

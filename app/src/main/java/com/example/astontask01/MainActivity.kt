@@ -18,10 +18,10 @@ class MainActivity : AppCompatActivity() {
             navigateToFragment(MainFragment.newInstance())
         }
     }
-    fun navigateToFragment(fmt: Fragment) {
+    fun navigateToFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, fmt)
-            .addToBackStack(fmt.javaClass.name)
+            .replace(R.id.fragmentContainerView, fragment)
+            .addToBackStack(fragment.javaClass.name)
             .commit()
     }
 }

@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.astontask01.adapter.MusicGroupListAdapter
 import com.example.astontask01.data.Model
+import com.example.astontask01.data.Model.Companion.modelList
 import com.example.astontask01.databinding.FragmentMainBinding
 
 
@@ -16,11 +16,9 @@ class MainFragment : Fragment() {
 
     private val adapter: MusicGroupListAdapter = MusicGroupListAdapter()
 
-    private lateinit var modelList: MutableList<Model>
-
     private var _binding: FragmentMainBinding? = null
 
-    private val binding get() = _binding!!
+    private val binding get() = requireNotNull(_binding)
 
     companion object {
 
@@ -39,12 +37,12 @@ class MainFragment : Fragment() {
     private fun setUpAdapter() {
 
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
-    private fun populateList() {
+    private fun createList() {
 
-        modelList = mutableListOf(
+       modelList = mutableListOf(
             Model(
                 "Metallica",
                 resources.getString(R.string.Metallica),
@@ -83,15 +81,11 @@ class MainFragment : Fragment() {
     ): View {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        populateList()
+
+        createList()
         setUpAdapter()
 
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,5 +104,10 @@ class MainFragment : Fragment() {
                 elementPos.text = elementPosition
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
