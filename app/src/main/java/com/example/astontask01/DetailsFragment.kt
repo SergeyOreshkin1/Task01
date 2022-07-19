@@ -1,16 +1,18 @@
 package com.example.astontask01
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.example.astontask01.databinding.FragmentDetailsBinding
 
 
 class DetailsFragment : Fragment() {
+
+    private lateinit var elementPosition: String
 
     companion object {
 
@@ -29,7 +31,7 @@ class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
 
-    private val binding get() = _binding!!
+    private val binding get() = requireNotNull(_binding)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,16 +46,14 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val description = arguments?.getString(KEY_DESCRIPTION)
-        val elementPosition = "Был закрыт элемент с позицией: " + arguments?.getString(KEY_ELEMENT_POSITION)
+       val description = arguments?.getString(KEY_DESCRIPTION)
+       elementPosition = "Был закрыт элемент с позицией: " + arguments?.getString(KEY_ELEMENT_POSITION)
 
-        val callback= object : OnBackPressedCallback(true){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 (activity as MainActivity).navigateToFragment(MainFragment.newInstance(elementPosition))
             }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(callback)
+        })
 
         binding.apply {
 
@@ -71,3 +71,5 @@ class DetailsFragment : Fragment() {
         _binding = null
     }
 }
+
+

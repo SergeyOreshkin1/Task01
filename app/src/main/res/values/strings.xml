@@ -2,9 +2,9 @@
     <string name="app_name">AstonTask01</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="name">Название</string>
-    <string name="country">Страна</string>
-    <string name="genre">Жанр</string>
+    <string name="name">Название:\ </string>
+    <string name="country">Страна:\ </string>
+    <string name="genre">Жанр:\ </string>
     <string name="back">К списку музыкальных групп</string>
     <string name="musicGroup">Музыкальные группы</string>
     <string name="Metallica">Metallica — группа, исполняющая музыку в стилях трэш-метал, хеви-метал, дум-метал, образованная в 1981 году.
